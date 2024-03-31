@@ -17,27 +17,9 @@ export const refs = {
 export let query;
 let currentPage = 1;
 let maxPage = 0;
-const pre_page = 15;
+let pre_page = 15;
 
-// ===========================================
-export function showLoader() {
-  refs.loader.classList.remove('is-hidden');
-}
-
-export function hideLoader() {
-  refs.loader.classList.add('is-hidden');
-}
-// ============
-
-function showLoadMore() {
-  refs.btnLoadMore.classList.remove('is-hidden');
-}
-
-function hideLoadMore() {
-  refs.btnLoadMore.classList.add('is-hidden');
-}
-
-//===========================================
+// ==============================================
 
 refs.form.addEventListener('submit', onFormSubmit);
 refs.btnLoadMore.addEventListener('click', onLoadAddPage);
@@ -93,16 +75,33 @@ async function onLoadAddPage() {
   }
   scroll();
   checkBtnStatus();
-  hideLoader();
+  //   hideLoader();
+}
+// ===========================================
+export function showLoader() {
+  refs.loader.classList.remove('is-hidden');
 }
 
-// ==============================================
+export function hideLoader() {
+  refs.loader.classList.add('is-hidden');
+}
+// ============
+
+function showLoadMore() {
+  refs.btnLoadMore.classList.remove('is-hidden');
+}
+
+function hideLoadMore() {
+  refs.btnLoadMore.classList.add('is-hidden');
+}
+
+//===========================================
 
 function checkBtnStatus() {
-  if (currentPage >= maxPage) {
+  if (currentPage > maxPage) {
     hideLoadMore();
-    iziToast.info({
-      color: 'yellow',
+    iziToast.error({
+      //   color: 'yellow',
       message: "We're sorry, but you've reached the end of search results.",
       position: 'topRight',
     });
@@ -112,9 +111,9 @@ function checkBtnStatus() {
 }
 // =============================================
 function scroll() {
-  const height = refs.gallery.firstElementChild.getBoundingClientRect().height;
-  scrollBy({
-    top: height,
+  const height = refs.gallery.getBoundingClientRect().height;
+  window.scrollBy({
+    top: height * 2,
     behavior: 'smooth',
   });
 }
