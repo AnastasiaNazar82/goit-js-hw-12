@@ -14,13 +14,13 @@ export const refs = {
   btnLoadMore: document.querySelector('.loadMore'),
 };
 
-export let inputValue = document.querySelector('input');
+let query;
 let currentPage = 1;
 let maxPage = 0;
-const preSize = 15;
+const pageSize = 15;
 
 // ===========================================
-function showLoader() {
+export function showLoader() {
   refs.loader.classList.remove('is-hidden');
 }
 
@@ -40,16 +40,16 @@ function hideLoadMore() {
 //===========================================
 
 refs.form.addEventListener('submit', onFormSubmit);
-refs.btnLoadMore.addEventListener('click', onLoadMoreClick);
+refs.btnLoadMore.addEventListener('click', onLoadAddPage);
 
 async function onFormSubmit(e) {
   e.preventDefault();
   hideLoadMore();
   currentPage = 1;
-  const searchImgs = inputValue.value.trim();
+  query = e.target.elements.query.value.trim();
   refs.galleryElement.innerHTML = '';
 
-  if (!searchImgs) {
+  if (!query) {
     hideLoader();
     iziToast.info({
       message: ` Please fill in the field for search`,
@@ -61,8 +61,8 @@ async function onFormSubmit(e) {
 
   try {
     showLoader();
-    const data = await getImg(inputValue, currentPage);
-    maxPage = Math.ceil(data.totalHits / preSize);
+    const data = await getImg(query, currentPage);
+    maxPage = Math.ceil(data.totalHits / pageSize);
     refs.galleryElement.insertAdjacentHTML(
       'beforeend',
       renderImages(data.hits)
@@ -77,11 +77,11 @@ async function onFormSubmit(e) {
 }
 
 // ==========================================
-async function onLoadMoreClick() {
-  currentPage += 1;
-  showLoader;
+async function onLoadAddPage() {
   try {
-    const data = await getImg(inputValue, currentPage);
+    currentPage += 1;
+    // showLoader;
+    const data = await getImg(query, currentPage);
 
     refs.list.insertAdjacentHTML('beforeend', renderImages(data.hits));
     lightbox.refresh();
