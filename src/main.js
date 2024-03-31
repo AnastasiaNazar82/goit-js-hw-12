@@ -17,7 +17,7 @@ export const refs = {
 export let query;
 let currentPage = 1;
 let maxPage = 0;
-const pageSize = 15;
+const pre_page = 15;
 
 // ===========================================
 export function showLoader() {
@@ -62,7 +62,7 @@ async function onFormSubmit(e) {
   try {
     showLoader();
     const data = await getImg(query, currentPage);
-    maxPage = Math.ceil(data.totalHits / pageSize);
+    maxPage = Math.ceil(data.totalHits / pre_page);
     refs.galleryElement.insertAdjacentHTML(
       'beforeend',
       renderImages(data.hits)
@@ -114,7 +114,7 @@ function checkBtnStatus() {
 function scroll() {
   const height = refs.gallery.firstElementChild.getBoundingClientRect().height;
   scrollBy({
-    top: height * 2,
+    top: height,
     behavior: 'smooth',
   });
 }

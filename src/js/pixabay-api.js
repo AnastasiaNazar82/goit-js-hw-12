@@ -12,7 +12,7 @@ export async function getImg(query, currentPage) {
     orientation: 'horizontal',
     safesearch: 'true',
     page: currentPage,
-    pageSize: 15,
+    pre_page: 15,
   };
 
   const res = await axios.get(url, { params });
