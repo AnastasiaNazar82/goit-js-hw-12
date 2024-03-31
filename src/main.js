@@ -80,10 +80,13 @@ async function onFormSubmit(e) {
 async function onLoadAddPage() {
   try {
     currentPage += 1;
-    // showLoader;
+    showLoader;
     const data = await getImg(query, currentPage);
 
-    refs.list.insertAdjacentHTML('beforeend', renderImages(data.hits));
+    refs.galleryElement.insertAdjacentHTML(
+      'beforeend',
+      renderImages(data.hits)
+    );
     lightbox.refresh();
   } catch (error) {
     console.log(error);
