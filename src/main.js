@@ -14,7 +14,7 @@ export const refs = {
   btnLoadMore: document.querySelector('.loadMore'),
 };
 
-let query;
+export let query;
 let currentPage = 1;
 let maxPage = 0;
 const pageSize = 15;
@@ -110,6 +110,7 @@ function checkBtnStatus() {
     showLoadMore();
   }
 }
+// =============================================
 function scroll() {
   const height = refs.gallery.firstElementChild.getBoundingClientRect().height;
   scrollBy({

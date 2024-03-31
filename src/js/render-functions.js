@@ -7,16 +7,16 @@ import 'izitoast/dist/css/iziToast.min.css';
 import { refs, hideLoader } from '../main.js';
 
 export function renderImages(imagesArr) {
-  if (imagesArr.length === 0) {
-    hideLoader();
-    iziToast.error({
-      message: `❌ Sorry, there are no images matching your search query. Please, try again!`,
-      theme: 'dark',
-      progressBarColor: '#FFFFFF',
-      color: '#EF4040',
-      position: 'topRight',
-    });
-  }
+  //   if (imagesArr.length === 0) {
+  //     hideLoader();
+  //     iziToast.error({
+  //       message: `❌ Sorry, there are no images matching your search query. Please, try again!`,
+  //       theme: 'dark',
+  //       progressBarColor: '#FFFFFF',
+  //       color: '#EF4040',
+  //       position: 'topRight',
+  //     });
+  //   }
 
   const imgGallery = imagesArr
     .map(
