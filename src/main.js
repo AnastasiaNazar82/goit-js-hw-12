@@ -17,7 +17,7 @@ export const refs = {
 export let query;
 let currentPage = 1;
 let maxPage = 0;
-const per_page = 15;
+const perPage = 15;
 
 // ==============================================
 
@@ -46,7 +46,7 @@ async function onFormSubmit(e) {
   try {
     showLoader();
     const data = await getImg(query, currentPage);
-    maxPage = Math.ceil(data.totalHits / per_page);
+    maxPage = Math.ceil(data.totalHits / perPage);
     refs.galleryElement.insertAdjacentHTML(
       'beforeend',
       renderImages(data.hits)
@@ -104,7 +104,6 @@ function checkBtnStatus() {
   if (currentPage >= maxPage) {
     hideLoadMore();
     iziToast.error({
-      //   color: 'yellow',
       message: "We're sorry, but you've reached the end of search results.",
       position: 'topRight',
     });
