@@ -17,7 +17,7 @@ export const refs = {
 export let query;
 let currentPage = 1;
 let maxPage = 0;
-const pre_page = 15;
+const per_page = 15;
 
 // ==============================================
 
@@ -27,6 +27,8 @@ refs.btnLoadMore.addEventListener('click', onLoadAddPage);
 async function onFormSubmit(e) {
   e.preventDefault();
   hideLoadMore();
+  showLoader();
+
   currentPage = 1;
   query = e.target.elements.query.value.trim();
   refs.galleryElement.innerHTML = '';
@@ -44,7 +46,7 @@ async function onFormSubmit(e) {
   try {
     showLoader();
     const data = await getImg(query, currentPage);
-    maxPage = Math.ceil(data.totalHits / pre_page);
+    maxPage = Math.ceil(data.totalHits / per_page);
     refs.galleryElement.insertAdjacentHTML(
       'beforeend',
       renderImages(data.hits)
@@ -63,6 +65,7 @@ async function onLoadAddPage() {
   try {
     currentPage += 1;
     showLoader;
+    // hideLoadMore();
     const data = await getImg(query, currentPage);
 
     refs.galleryElement.insertAdjacentHTML(
@@ -73,9 +76,9 @@ async function onLoadAddPage() {
   } catch (error) {
     console.log(error);
   }
+  hideLoader();
   scroll();
   checkBtnStatus();
-  //   hideLoader();
 }
 // ===========================================
 export function showLoader() {
@@ -98,7 +101,7 @@ function hideLoadMore() {
 //===========================================
 
 function checkBtnStatus() {
-  if (currentPage > maxPage) {
+  if (currentPage >= maxPage) {
     hideLoadMore();
     iziToast.error({
       //   color: 'yellow',
