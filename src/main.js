@@ -14,7 +14,7 @@ export const refs = {
   btnLoadMore: document.querySelector('.loadMore'),
 };
 
-const inputValue = document.querySelector('input');
+export let inputValue = document.querySelector('input');
 let currentPage = 1;
 let maxPage = 0;
 const preSize = 15;

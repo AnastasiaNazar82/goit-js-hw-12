@@ -17,8 +17,7 @@ export function renderImages(imagesArr) {
       position: 'topRight',
     });
   }
-  // refs.galleryElement.innerHTML = '';
-  //   } else {
+
   const imgGallery = imagesArr
     .map(
       ({
@@ -42,10 +41,6 @@ export function renderImages(imagesArr) {
     </li>`
     )
     .join('');
-  // refs.galleryElement.innerHTML = imgGallery;
-  // refs.galleryElement.insertAdjacentHTML(
-  //   'beforeend',
-  //   renderImages(data.hits)
-  // );
+
   return imgGallery;
 }
