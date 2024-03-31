@@ -111,7 +111,7 @@ function checkBtnStatus() {
 }
 // =============================================
 function scroll() {
-  const height = refs.galleryElement.getBoundingClientRect().height;
+  const height = refs.galleryElement.firstChild.getBoundingClientRect().height;
   window.scrollBy({
     top: height * 2,
     behavior: 'smooth',
