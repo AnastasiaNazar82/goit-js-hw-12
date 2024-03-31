@@ -17,7 +17,7 @@ export const refs = {
 export let query;
 let currentPage = 1;
 let maxPage = 0;
-let pre_page = 15;
+const pre_page = 15;
 
 // ==============================================
 
